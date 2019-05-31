@@ -14,6 +14,7 @@ object Common {
     licenses += ("MIT", new URL("http://opensource.org/licenses/MIT")),
     resolvers ++= Dependencies.resolvers(),
     libraryDependencies ++= Dependencies(),
+    publishTo := Some(Resolver.bintrayRepo("engitano", "maven")),
     bintrayOrganization := Some("engitano"),
     bintrayPackageLabels ++= Seq("gcp", "grpc", "fs2"),
     Compile / PB.targets := Seq(
