@@ -1,5 +1,7 @@
 import sbt.configs
 
+publishTo := Some(Resolver.bintrayRepo("engitano", "maven"))
+
 lazy val root = (project in file("."))
   .aggregate(
     `fs2-google-iam-v1`,
