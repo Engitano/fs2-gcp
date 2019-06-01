@@ -9,6 +9,7 @@ lazy val root = (project in file("."))
     skip in publish := true
   )
   .aggregate(
+    `fs2-google-common-protos`,
     `fs2-google-iam-v1`,
     `fs2-google-cloud-pubsub-v1`,
     `fs2-google-cloud-datastore-v1`,
