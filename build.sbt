@@ -3,7 +3,10 @@ import sbt.configs
 publishTo := Some(Resolver.bintrayRepo("engitano", "maven"))
 
 lazy val root = (project in file("."))
-  .settings(publishArtifact := false)
+  .settings(
+    publishArtifact := false,
+    bintrayOrganization := Some("engitano")
+  )
   .aggregate(
     `fs2-google-iam-v1`,
     `fs2-google-cloud-pubsub-v1`,
