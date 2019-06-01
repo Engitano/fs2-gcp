@@ -5,7 +5,8 @@ publishTo := Some(Resolver.bintrayRepo("engitano", "maven"))
 lazy val root = (project in file("."))
   .settings(
     publishArtifact := false,
-    bintrayOrganization := Some("engitano")
+    bintrayOrganization := Some("engitano"),
+    licenses += ("MIT", new URL("http://opensource.org/licenses/MIT")),
   )
   .aggregate(
     `fs2-google-iam-v1`,
