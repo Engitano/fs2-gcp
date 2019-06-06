@@ -32,7 +32,7 @@ jobs:
             - ivy
       - run:
           command: |
-            sbt ";release"
+            sbt ";release with-defaults"
 
 workflows:
   version: 2
@@ -43,7 +43,7 @@ workflows:
           filters:
             tags:
               ignore: /.*/
-      - build:
+      - release:
           context: release
           filters:
             branches:
