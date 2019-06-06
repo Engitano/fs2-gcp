@@ -33,6 +33,7 @@ jobs:
       - restore_cache:
           keys:
             - ivy
+      - run: mkdir ~/.ssh && ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - run: sbt ";release with-defaults"
 
 workflows:
