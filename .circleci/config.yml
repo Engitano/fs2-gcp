@@ -1,0 +1,54 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: mtranter/sbt-protoc:1.2.8_2.12
+    working_directory: ~/fs2-gcp
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - ivy
+      - run:
+          command: |
+            sbt ";compile"
+      - save_cache:
+          key: ivy
+          paths:
+            - "~/.ivy2/cache"
+            - "~/.sbt"
+            - "~/.m2"
+      - persist_to_workspace:
+          root: ~/fs2-gcp
+          paths:
+            - /*
+  release:
+    docker:
+      - image: mtranter/sbt-protoc:1.2.8_2.12
+    working_directory: ~/fs2-gcp
+    steps:
+      - restore_cache:
+          keys:
+            - ivy
+      - run:
+          command: |
+            sbt ";release"
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build:
+          context: release
+          filters:
+            tags:
+              ignore: /.*/
+      - build:
+          context: release
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build
+
