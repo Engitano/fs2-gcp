@@ -34,7 +34,11 @@ jobs:
           keys:
             - ivy
       - run: mkdir ~/.ssh && ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-      - run: sbt ";release with-defaults"
+      - run:
+          command: |
+            git config --global user.email "ci@engitano.com"
+            git config --global user.name "$CIRCLE_USERNAME"
+            sbt ";release with-defaults"
 
 workflows:
   version: 2
