@@ -2,8 +2,6 @@ import sbt.configs
 
 publishTo := Some(Resolver.bintrayRepo("engitano", "maven"))
 
-
-
 lazy val root = (project in file("."))
   .settings(
     skip in publish := true
