@@ -28,6 +28,8 @@ jobs:
       - image: mtranter/sbt-protoc:1.2.8_2.12
     working_directory: ~/fs2-gcp
     steps:
+      - attach_workspace:
+          at: ~/fs2-gcp
       - restore_cache:
           keys:
             - ivy
