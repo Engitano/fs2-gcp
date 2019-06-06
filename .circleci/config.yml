@@ -21,7 +21,7 @@ jobs:
       - persist_to_workspace:
           root: ~/fs2-gcp
           paths:
-            - /*
+            - ./*
   release:
     docker:
       - image: mtranter/sbt-protoc:1.2.8_2.12
