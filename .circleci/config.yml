@@ -9,9 +9,10 @@ jobs:
       - restore_cache:
           keys:
             - ivy
-      - run:
-          command: |
-            sbt ";compile"
+      - run: git submodule sync
+      - run: git submodule update --init
+
+      - run: sbt ";compile"
       - save_cache:
           key: ivy
           paths:
@@ -30,9 +31,7 @@ jobs:
       - restore_cache:
           keys:
             - ivy
-      - run:
-          command: |
-            sbt ";release with-defaults"
+      - run: sbt ";release with-defaults"
 
 workflows:
   version: 2
