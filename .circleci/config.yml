@@ -38,7 +38,7 @@ jobs:
           command: |
             git config --global user.email "ci@engitano.com"
             git config --global user.name "$CIRCLE_USERNAME"
-            sbt ";release with-defaults"
+            sbt ";release cross with-defaults"
 
 workflows:
   version: 2

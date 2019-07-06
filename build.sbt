@@ -16,10 +16,13 @@ lazy val root = (project in file("."))
     `fs2-google-cloud-firestore-admin-v1`,
     `fs2-google-cloud-tasks-v1`,
     `fs2-google-cloud-bigtable-v2`,
-    `fs2-google-cloud-bigtable-admin-v2`
+    `fs2-google-cloud-bigtable-admin-v2`,
+    `fs2-google-cloud-spanner-v1`,
+    `fs2-google-cloud-spanner-admin-database-v1`,
+    `fs2-google-cloud-spanner-admin-instance-v1`
     )
 
-lazy val `fs2-google-common-protos` = (project in file("common"))
+lazy val `fs2-google-common-protos` = (project in file("lib") / "common")
   .settings(
     Common(),
     bintrayPackageLabels ++= Seq("google-common-protos"),
@@ -34,7 +37,7 @@ lazy val `fs2-google-common-protos` = (project in file("common"))
   )
   .enablePlugins(Fs2Grpc)
 
-lazy val `fs2-google-iam-v1` = (project in file("iam"))
+lazy val `fs2-google-iam-v1` = (project in file("lib") / "iam")
   .settings(
     Common(),
     bintrayPackageLabels ++= Seq("iam"),
@@ -45,7 +48,7 @@ lazy val `fs2-google-iam-v1` = (project in file("iam"))
   .dependsOn(`fs2-google-common-protos`)
   .enablePlugins(Fs2Grpc)
 
-lazy val `fs2-google-cloud-pubsub-v1` = (project in file("pubsub"))
+lazy val `fs2-google-cloud-pubsub-v1` = (project in file("lib") / "pubsub")
   .settings(
     Common(),
     bintrayPackageLabels ++= Seq("pubsub"),
@@ -56,7 +59,7 @@ lazy val `fs2-google-cloud-pubsub-v1` = (project in file("pubsub"))
   .dependsOn(`fs2-google-common-protos`)
   .enablePlugins(Fs2Grpc)
 
-lazy val `fs2-google-cloud-datastore-v1` = (project in file("datastore"))
+lazy val `fs2-google-cloud-datastore-v1` = (project in file("lib") / "datastore")
   .settings(
     Common(),
     bintrayPackageLabels ++= Seq("datastore"),
@@ -67,7 +70,7 @@ lazy val `fs2-google-cloud-datastore-v1` = (project in file("datastore"))
   .dependsOn(`fs2-google-common-protos`)
   .enablePlugins(Fs2Grpc)
 
-lazy val `fs2-google-cloud-datastore-admin-v1` = (project in file("datastore-admin"))
+lazy val `fs2-google-cloud-datastore-admin-v1` = (project in file("lib") / "datastore-admin")
   .settings(
     Common(),
     bintrayPackageLabels ++= Seq("datastore"),
@@ -78,7 +81,7 @@ lazy val `fs2-google-cloud-datastore-admin-v1` = (project in file("datastore-adm
   .dependsOn(`fs2-google-common-protos`)
   .enablePlugins(Fs2Grpc)
 
-lazy val `fs2-google-cloud-firestore-v1` = (project in file("firestore"))
+lazy val `fs2-google-cloud-firestore-v1` = (project in file("lib") / "firestore")
   .settings(
     Common(),
     bintrayPackageLabels ++= Seq("firestore"),
@@ -89,7 +92,7 @@ lazy val `fs2-google-cloud-firestore-v1` = (project in file("firestore"))
   .dependsOn(`fs2-google-common-protos`)
   .enablePlugins(Fs2Grpc)
 
-lazy val `fs2-google-cloud-firestore-admin-v1` = (project in file("firestore-admin"))
+lazy val `fs2-google-cloud-firestore-admin-v1` = (project in file("lib") / "firestore-admin")
   .settings(
     Common(),
     bintrayPackageLabels ++= Seq("firestore"),
@@ -100,7 +103,7 @@ lazy val `fs2-google-cloud-firestore-admin-v1` = (project in file("firestore-adm
   .dependsOn(`fs2-google-common-protos`)
   .enablePlugins(Fs2Grpc)
 
-lazy val `fs2-google-cloud-tasks-v1` = (project in file("cloudtasks"))
+lazy val `fs2-google-cloud-tasks-v1` = (project in file("lib") / "cloudtasks")
   .settings(
     Common(),
     bintrayPackageLabels ++= Seq("cloudtasks"),
@@ -111,7 +114,7 @@ lazy val `fs2-google-cloud-tasks-v1` = (project in file("cloudtasks"))
   .dependsOn(`fs2-google-common-protos`, `fs2-google-iam-v1`)
   .enablePlugins(Fs2Grpc)
 
-lazy val `fs2-google-cloud-bigtable-v2` = (project in file("bigtable"))
+lazy val `fs2-google-cloud-bigtable-v2` = (project in file("lib") / "bigtable")
   .settings(
     Common(),
     bintrayPackageLabels ++= Seq("bigtable"),
@@ -122,12 +125,45 @@ lazy val `fs2-google-cloud-bigtable-v2` = (project in file("bigtable"))
   .dependsOn(`fs2-google-common-protos`)
   .enablePlugins(Fs2Grpc)
 
-lazy val `fs2-google-cloud-bigtable-admin-v2` = (project in file("bigtable-admin"))
+lazy val `fs2-google-cloud-bigtable-admin-v2` = (project in file("lib") / "bigtable-admin")
   .settings(
     Common(),
     bintrayPackageLabels ++= Seq("bigtable"),
     Compile / PB.protoSources := Seq(
       (ThisBuild / baseDirectory).value /  "googleapis" / "google" / "bigtable" / "admin" / "v2"
+    ),
+  )
+  .dependsOn(`fs2-google-common-protos`, `fs2-google-iam-v1`)
+  .enablePlugins(Fs2Grpc)
+
+lazy val `fs2-google-cloud-spanner-v1` = (project in file("lib") / "spanner")
+  .settings(
+    Common(),
+    bintrayPackageLabels ++= Seq("spanner"),
+    Compile / PB.protoSources := Seq(
+      (ThisBuild / baseDirectory).value /  "googleapis" / "google" / "spanner" / "v1"
+    ),
+  )
+  .dependsOn(`fs2-google-common-protos`, `fs2-google-iam-v1`)
+  .enablePlugins(Fs2Grpc)
+
+lazy val `fs2-google-cloud-spanner-admin-database-v1` = (project in file("lib") / "spanner-admin")
+  .settings(
+    Common(),
+    bintrayPackageLabels ++= Seq("spanner"),
+    Compile / PB.protoSources := Seq(
+      (ThisBuild / baseDirectory).value /  "googleapis" / "google" / "spanner" / "admin" / "database" / "v1"
+    ),
+  )
+  .dependsOn(`fs2-google-common-protos`, `fs2-google-iam-v1`)
+  .enablePlugins(Fs2Grpc)
+
+lazy val `fs2-google-cloud-spanner-admin-instance-v1` = (project in file("lib") / "spanner-instance")
+  .settings(
+    Common(),
+    bintrayPackageLabels ++= Seq("spanner"),
+    Compile / PB.protoSources := Seq(
+      (ThisBuild / baseDirectory).value /  "googleapis" / "google" / "spanner" / "admin" / "instance" / "v1"
     ),
   )
   .dependsOn(`fs2-google-common-protos`, `fs2-google-iam-v1`)
