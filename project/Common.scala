@@ -4,7 +4,7 @@ import sbt.URL
 import bintray.BintrayKeys._
 import sbtprotoc.ProtocPlugin.autoImport._
 import org.lyranthe.fs2_grpc.java_runtime.sbt_gen.Fs2GrpcPlugin.autoImport._
-
+import sbtrelease.ReleasePlugin.autoImport._
 object Common {
 
   val scala213 = "2.13.0"
@@ -23,6 +23,7 @@ object Common {
     libraryDependencies := Dependencies(),
     bintrayOrganization := Some("engitano"),
     bintrayPackageLabels ++= Seq("gcp", "grpc", "fs2"),
+    releaseCommitMessage := s"Setting version to ${(version in ThisBuild).value} [ci skip]",
     Compile / PB.targets := Seq(
         scalapb.gen(flatPackage = true) -> (Compile / sourceManaged).value
     ),
