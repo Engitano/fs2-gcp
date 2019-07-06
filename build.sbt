@@ -6,6 +6,7 @@ lazy val root = (project in file("."))
   .settings(
     skip in publish := true
   )
+  .settings(Common())
   .aggregate(
     `fs2-google-common-protos`,
     `fs2-google-iam-v1`,
@@ -20,7 +21,7 @@ lazy val root = (project in file("."))
     `fs2-google-cloud-spanner-v1`,
     `fs2-google-cloud-spanner-admin-database-v1`,
     `fs2-google-cloud-spanner-admin-instance-v1`
-    )
+    ).enablePlugins(Fs2Grpc)
 
 lazy val `fs2-google-common-protos` = (project in file("lib") / "common")
   .settings(
