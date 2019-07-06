@@ -13,12 +13,13 @@ object Common {
   val supportedScalaVersions = List(scala213, scala212, scala211)
 
   def apply() = Seq(
-    scalaVersion := scala213,
+      scalaVersion := scala213,
     organization := "com.engitano",
     organizationName := "Engitano",
     startYear := Some(2019),
     licenses += ("MIT", new URL("http://opensource.org/licenses/MIT")),
     crossScalaVersions := supportedScalaVersions,
+    releaseCrossBuild := true,
     resolvers ++= Dependencies.resolvers(),
     libraryDependencies := Dependencies(),
     bintrayOrganization := Some("engitano"),
